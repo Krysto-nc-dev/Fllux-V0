@@ -1,4 +1,4 @@
-// import { ModeToggle } from '@/components/global/mode-toggle'
+import { ModeToggle } from '@/components/global/mode-toggle'
 import { UserButton } from '@clerk/nextjs'
 import { User } from '@clerk/nextjs/server'
 import Image from 'next/image'
@@ -26,7 +26,8 @@ const Navigation = ({ user }: Props) => {
           <Link href={'#'}>Tarifs</Link>
           <Link href={'#'}>A propos</Link>
           <Link href={'#'}>Documentation</Link>
-          <Link href={'#'}>Features</Link>
+    
+          <Link href={'#'}>Contact</Link>
         </ul>
       </nav>
       <aside className="flex gap-2 items-center">
@@ -37,7 +38,7 @@ const Navigation = ({ user }: Props) => {
           Connexion
         </Link>
         <UserButton />
-        {/* <ModeToggle /> */}
+         <ModeToggle /> 
       </aside>
     </div>
   )
