@@ -26,7 +26,6 @@ const Navigation = ({ user }: Props) => {
           <Link href={'#'}>Tarifs</Link>
           <Link href={'#'}>A propos</Link>
           <Link href={'#'}>Documentation</Link>
-    
           <Link href={'#'}>Contact</Link>
         </ul>
       </nav>

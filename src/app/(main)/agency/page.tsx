@@ -6,7 +6,7 @@ type Props = {}
 
 const page = (props: Props) => {
   return (
-    <div>Domaine</div>
+    <div>Dashboard de l'entreprise</div>
   )
 }
 
