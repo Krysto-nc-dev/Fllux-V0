@@ -81,8 +81,9 @@ model Permissions {
 model Agency {
   id               String                @id @default(uuid())
   dolibarrAgencyId String                @unique
+  ridet            String                @unique
   connectAccountId String?               @default("")
-  customerId       String                @default("")
+  // customerId       String                @default("")
   name             String
   agencyLogo       String                @db.Text
   companyEmail     String                @db.Text
@@ -93,6 +94,9 @@ model Agency {
   zipCode          String
   state            String
   country          String
+  bp               String
+  fiscalYearStart  DateTime
+  fiscalYearEnd    DateTime
   goal             Int                   @default(5)
   users            User[]
   createdAt        DateTime              @default(now())

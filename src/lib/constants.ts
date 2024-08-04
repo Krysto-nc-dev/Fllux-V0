@@ -65,7 +65,23 @@ export const pricingCards =
       "Membres d'équipe illimités"
     ],
     "priceId": "price_1OYxkqFj9oKEERu1NbKUxXxN"
-  }
+  },
+  {
+    "title": "Sur-mesure",
+    "description": "Parfait pour les entreprises confirmée",
+    "price": "Nous contacter",
+    "duration": "",
+     contact: true,
+    "highlight": "Fonctionnalités clés",
+    "features": [
+      "Facturation récurrente",
+      "Support 7/7",
+      "Formations",
+      "Développement sur mesure",
+      "Adapter a vos besoins métier"
+    ],
+    "priceId": ""
+  },
 ]
 
 

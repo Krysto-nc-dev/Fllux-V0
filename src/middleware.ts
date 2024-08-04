@@ -6,8 +6,8 @@ const publicRoutes = createRouteMatcher([
   '/',
   '/site',
   '/api/uploadthing',
-  '/sign-in',
-  '/sign-up',
+  'agency/sign-in',
+  'agency/sign-up',
 ])
 
 // Définir les routes protégées

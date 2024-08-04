@@ -57,6 +57,7 @@ export default function Home() {
                 <CardTitle
                   className={clsx({
                     'text-muted-foreground': card.title != 'Pro',
+          
                   })}
                 >
                   {card.title}
@@ -64,8 +65,17 @@ export default function Home() {
                 <CardDescription>{card.description}</CardDescription>
               </CardHeader>
               <CardContent>
-                <span className="text-4xl font-bold">{card.price}</span>
-                <span className="text-muted-foreground font-bold">/Mois</span>
+                <span className="text-3xl font-bold">{card.price}</span>
+                {
+                  card.title === "Sur-mesure" ? (
+                    <p className="text-muted-foreground text-sm">
+                      Disponible à la demande
+                    </p>
+                  ) : (
+                    <p className="text-muted-foreground font-bold">/Mois</p>
+                  )
+                }
+               
               </CardContent>
               <CardFooter className="flex flex-col items-start gap-4">
                 <div>
@@ -77,15 +87,17 @@ export default function Home() {
                   ))}
                 </div>
                 <Link
-                  href={`/agency?plan=${card.priceId}`}
+                  href={card.title === "Sur-mesure" ? `/contact?plan=${card.priceId}` : `/agency?plan=${card.priceId}`}
                   className={clsx(
                     'w-full text-center bg-primary p-2 rounded-md',
                     {
                       '!bg-muted-foreground': card.title !== 'Pro',
+                      '!bg-muted-foreground': card.title !==  'Sur-mesure',
                     }
                   )}
                 >
-                  Commencer
+                  {card.title === "Sur-mesure" ? "Nous contacter" : "Commencer"}
+                
                 </Link>
               </CardFooter>
             </Card>
