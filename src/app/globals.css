@@ -119,3 +119,27 @@ B (255 */
     transform: scale(1);
   }
 }
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #0b101e;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #0b101e;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #0b101e;
+}
+
+/* Firefox */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #4e7ce1 #0b101e;
+}
+
