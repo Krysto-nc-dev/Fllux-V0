@@ -113,7 +113,7 @@ const CommandSeparator = React.forwardRef<
 ))
 CommandSeparator.displayName = CommandPrimitive.Separator.displayName
 
-//CHANGED:
+// UPDATED CommandItem to ensure links are active
 const CommandItem = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.Item>,
   React.ComponentPropsWithoutRef<typeof CommandPrimitive.Item>
@@ -121,7 +121,7 @@ const CommandItem = React.forwardRef<
   <CommandPrimitive.Item
     ref={ref}
     className={cn(
-      'relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none aria-selected:bg-primary aria-selected:text-white aria-selected:font-bold  data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
+      'relative flex select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-all focus:bg-primary focus:text-white aria-selected:bg-primary aria-selected:text-white',
       className
     )}
     {...props}
