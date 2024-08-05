@@ -51,7 +51,6 @@ enum Icon {
 model User {
   id           String         @id @default(uuid())
   name         String
-  dolibarrAgencyId String     @unique
   avatarUrl    String         @db.Text
   email        String         @unique
   createdAt    DateTime       @default(now())
@@ -83,7 +82,7 @@ model Agency {
   dolibarrAgencyId String                @unique
   ridet            String                @unique
   connectAccountId String?               @default("")
-  // customerId       String                @default("")
+  customerId       String                @default("")
   name             String
   agencyLogo       String                @db.Text
   companyEmail     String                @db.Text
@@ -95,8 +94,8 @@ model Agency {
   state            String
   country          String
   bp               String
-  fiscalYearStart  DateTime
-  fiscalYearEnd    DateTime
+  fiscalYearStart   String
+  fiscalYearEnd     String
   goal             Int                   @default(5)
   users            User[]
   createdAt        DateTime              @default(now())

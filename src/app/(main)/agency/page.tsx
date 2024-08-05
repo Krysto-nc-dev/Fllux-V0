@@ -1,18 +1,17 @@
+import AgencyDetails from '@/components/forms/agency-details'
 import { getAuthUserDetails, verifyAndAcceptInvitation } from '@/lib/queries'
-import { currentUser } from '@clerk/nextjs/server'
+import { currentUser } from '@clerk/nextjs'
+import { Plan } from '@prisma/client'
 import { redirect } from 'next/navigation'
 import React from 'react'
-import { Plan } from '@prisma/client' // Correction du chemin d'importation
-import AgencyDetails from '@/components/forms/agency-details'
 
-const page = async ({ searchParams }: { searchParams: { plan: Plan; state: string; code: string } }) => {
+const Page = async ({ searchParams }: { searchParams: { plan: Plan; state: string; code: string } }) => {
   try {
     const agencyId = await verifyAndAcceptInvitation()
     console.log('agencyId:', agencyId)
 
     // Get user's details
     const user = await getAuthUserDetails()
-    console.log('user ::::', user)
 
     if (agencyId) {
       if (user?.role === 'SUBACCOUNT_GUEST' || user?.role === 'SUBACCOUNT_USER') {
@@ -38,11 +37,10 @@ const page = async ({ searchParams }: { searchParams: { plan: Plan; state: strin
     }
 
     const authUser = await currentUser()
-    // console.log('authUser ::::', authUser)
 
     return (
       <div className='flex justify-center items-center mt-4'>
-        <div className='mx-w-[850px] border-[1px] p-4 rounded-xl'>
+        <div className='max-w-[850px] border-[1px] p-4 rounded-xl'>
           <h1 className='text-4xl'>Créer une Agence</h1>
           <AgencyDetails
             data={{
@@ -58,4 +56,4 @@ const page = async ({ searchParams }: { searchParams: { plan: Plan; state: strin
   }
 }
 
-export default page
+export default Page

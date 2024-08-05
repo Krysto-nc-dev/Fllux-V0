@@ -65,15 +65,17 @@ const FormSchema = z.object({
   companyPhone: z.string().min(1),
   whiteLabel: z.boolean(),
   address: z.string().min(1),
+  dolibarrAgencyId: z.string().min(1),
+
   city: z.string().min(1),
   zipCode: z.string().min(1),
   state: z.string().min(1),
   country: z.string().min(1),
   agencyLogo: z.string().min(1),
-  // ridet: z.string().min(2).max(6),
-  // fiscalYearStart: z.string().min(2),
-  // fiscalYearEnd: z.string().min(2),
-  // bp: z.string().min(1),
+  ridet: z.string().min(2).max(7),
+ fiscalYearStart: z.string().min(2),
+ fiscalYearEnd: z.string().min(2),
+bp: z.string().min(1),
 })
 
 const AgencyDetails = ({ data }: Props) => {
@@ -91,13 +93,14 @@ const AgencyDetails = ({ data }: Props) => {
       address: data?.address,
       city: data?.city,
       zipCode: data?.zipCode,
+      dolibarrAgencyId: data?.dolibarrAgencyId,
       state: data?.state,
       country: data?.country || 'Nouvelle-Calédonie',
       agencyLogo: data?.agencyLogo,
-      // ridet: data?.ridet,
-      // fiscalYearStart: data?.fiscalYearStart,
-      // fiscalYearEnd: data?.fiscalYearEnd,
-      // bp: data?.bp,
+      ridet: data?.ridet,
+       fiscalYearStart: data?.fiscalYearStart,
+       fiscalYearEnd: data?.fiscalYearEnd,
+       bp: data?.bp,
     },
   })
   const isLoading = form.formState.isSubmitting
@@ -151,19 +154,20 @@ const AgencyDetails = ({ data }: Props) => {
   
       newUserData = await initUser({ role: 'AGENCY_OWNER' });
   
-      const response = await upsertAgency({
+      await upsertAgency({
         id: data?.id ? data.id : v4(),
         address: values.address,
-        // bp: values.bp,
-        // ridet: values.ridet,
-        // fiscalYearStart: values.fiscalYearStart,
-        // fiscalYearEnd: values.fiscalYearEnd,
+         bp: values.bp,
+       ridet: values.ridet,
+        fiscalYearStart: values.fiscalYearStart,
+        fiscalYearEnd: values.fiscalYearEnd,
         agencyLogo: values.agencyLogo,
         city: values.city,
         companyPhone: values.companyPhone,
         country: values.country,
         name: values.name,
         state: values.state,
+        dolibarrAgencyId: values.dolibarrAgencyId,
         whiteLabel: values.whiteLabel,
         zipCode: values.zipCode,
         createdAt: new Date(),
@@ -300,6 +304,24 @@ const AgencyDetails = ({ data }: Props) => {
                   )}
                 />
               </div>
+              <div className="flex md:flex-row gap-4">
+                <FormField
+                  disabled={isLoading}
+                  control={form.control}
+                  name="dolibarrAgencyId"
+                  render={({ field }) => (
+                    <FormItem className="flex-1">
+                      <FormLabel>
+                        DoliID'
+                      </FormLabel>
+                      <FormControl>
+                        <Input placeholder="ID" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
 
               <FormField
                 disabled={isLoading}
@@ -388,6 +410,20 @@ const AgencyDetails = ({ data }: Props) => {
                 <FormField
                   disabled={isLoading}
                   control={form.control}
+                  name="ridet"
+                  render={({ field }) => (
+                    <FormItem className="flex-1">
+                      <FormLabel>RIDET</FormLabel>
+                      <FormControl>
+                        <Input placeholder="1656241" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  disabled={isLoading}
+                  control={form.control}
                   name="country"
                   render={({ field }) => (
                     <FormItem className="flex-1">
@@ -399,8 +435,50 @@ const AgencyDetails = ({ data }: Props) => {
                     </FormItem>
                   )}
                 />
+                <FormField
+                  disabled={isLoading}
+                  control={form.control}
+                  name="bp"
+                  render={({ field }) => (
+                    <FormItem className="flex-1">
+                      <FormLabel>BP</FormLabel>
+                      <FormControl>
+                        <Input placeholder="CEDEX B0983" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
               
               </div>
+              <FormField
+                  disabled={isLoading}
+                  control={form.control}
+                  name="fiscalYearStart"
+                  render={({ field }) => (
+                    <FormItem className="flex-1">
+                      <FormLabel>BP</FormLabel>
+                      <FormControl>
+                        <Input placeholder="JJ/MM" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                     <FormField
+                  disabled={isLoading}
+                  control={form.control}
+                  name="fiscalYearEnd"
+                  render={({ field }) => (
+                    <FormItem className="flex-1">
+                      <FormLabel>BP</FormLabel>
+                      <FormControl>
+                        <Input placeholder="JJ/MM" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
               {data?.id && (
                 <div className="flex flex-col gap-2">
                   <FormLabel>Créer un objectif pour votre entrprise</FormLabel>
