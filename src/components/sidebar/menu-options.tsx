@@ -4,11 +4,9 @@ import { SubAccount } from '@prisma/client'
 import React, { useMemo, useState, useEffect } from 'react'
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from '../ui/sheet'
 import { Button } from '../ui/button'
-
 import {
   Agency,
   AgencySidebarOption,
-  SubAccount,
   SubAccountSidebarOption,
 } from '@prisma/client'
 import { ChevronsUpDown, Compass, Menu, PlusCircle } from 'lucide-react'
@@ -16,8 +14,8 @@ import clsx from 'clsx'
 import { AspectRatio } from '../ui/aspect-ratio'
 import Image from 'next/image'
 import { PopoverTrigger, Popover, PopoverContent } from '../ui/popover'
-import { Separator} from '../ui/separator'
-import { icons} from '../../lib/constants'
+import { Separator } from '../ui/separator'
+import { icons } from '../../lib/constants'
 import {
   Command,
   CommandEmpty,
@@ -52,8 +50,6 @@ const MenuOptions = ({
 }: Props) => {
   const { setOpen } = useModal()
   const [isMounted, setIsMounted] = useState(false)
-
-console.log(sidebarOpt)
 
   useEffect(() => {
     setIsMounted(true)
@@ -126,49 +122,25 @@ console.log(sidebarOpt)
                     user?.Agency && (
                       <CommandGroup heading="Entreprise">
                         <CommandItem className="!bg-transparent my-2 text-primary border-[1px] border-border p-2 rounded-md hover:bg-muted cursor-pointer transition-all">
-                          {defaultOpen ? (
-                            <Link
-                              href={`/agency/${user?.Agency.id}`}
-                              className="flex gap-4 w-full h-full"
-                            >
-                              <div className="relative w-16">
-                                <Image
-                                  src={user?.Agency?.agencyLogo}
-                                  alt="Logo entreprise"
-                                  fill
-                                  className="object-contain rounded-md"
-                                />
-                              </div>
-                              <div className="flex flex-col">
-                                <span>{user?.Agency?.name}</span>
-                                <span className="text-muted-foreground text-sm">
-                                  {user?.Agency?.city}
-                                </span>
-                              </div>
-                            </Link>
-                          ) : (
-                            <SheetClose asChild>
-                              <Link
-                                href={`/agency/${user?.Agency.id}`}
-                                className="flex gap-4 w-full h-full"
-                              >
-                                <div className="relative w-16">
-                                  <Image
-                                    src={user?.Agency?.agencyLogo}
-                                    alt="Logo entreprise"
-                                    fill
-                                    className="object-contain rounded-md"
-                                  />
-                                </div>
-                                <div className="flex flex-col">
-                                  <span>{user?.Agency?.name}</span>
-                                  <span className="text-muted-foreground text-sm">
-                                    {user?.Agency?.city}
-                                  </span>
-                                </div>
-                              </Link>
-                            </SheetClose>
-                          )}
+                          <Link
+                            href={`/agency/${user?.Agency.id}`}
+                            className="flex gap-4 w-full h-full"
+                          >
+                            <div className="relative w-16">
+                              <Image
+                                src={user?.Agency?.agencyLogo}
+                                alt="Logo entreprise"
+                                fill
+                                className="object-contain rounded-md"
+                              />
+                            </div>
+                            <div className="flex flex-col">
+                              <span>{user?.Agency?.name}</span>
+                              <span className="text-muted-foreground text-sm">
+                                {user?.Agency?.city}
+                              </span>
+                            </div>
+                          </Link>
                         </CommandItem>
                       </CommandGroup>
                     )}
@@ -176,49 +148,25 @@ console.log(sidebarOpt)
                     {!!subAccounts
                       ? subAccounts.map((subaccount) => (
                           <CommandItem key={subaccount.id}>
-                            {defaultOpen ? (
-                              <Link
-                                href={`/subaccount/${subaccount.id}`}
-                                className="flex gap-4 w-full h-full"
-                              >
-                                <div className="relative w-16">
-                                  <Image
-                                    src={subaccount.subAccountLogo}
-                                    alt="Logo sous-compte"
-                                    fill
-                                    className="object-contain rounded-md"
-                                  />
-                                </div>
-                                <div className="flex flex-col">
-                                  <span>{subaccount.name}</span>
-                                  <span className="text-muted-foreground text-sm">
-                                    {subaccount.city}
-                                  </span>
-                                </div>
-                              </Link>
-                            ) : (
-                              <SheetClose asChild>
-                                <Link
-                                  href={`/subaccount/${subaccount.id}`}
-                                  className="flex gap-4 w-full h-full"
-                                >
-                                  <div className="relative w-16">
-                                    <Image
-                                      src={subaccount.subAccountLogo}
-                                      alt="Logo sous-compte"
-                                      fill
-                                      className="object-contain rounded-md"
-                                    />
-                                  </div>
-                                  <div className="flex flex-col">
-                                    <span>{subaccount.name}</span>
-                                    <span className="text-muted-foreground text-sm">
-                                      {subaccount.city}
-                                    </span>
-                                  </div>
-                                </Link>
-                              </SheetClose>
-                            )}
+                            <Link
+                              href={`/subaccount/${subaccount.id}`}
+                              className="flex gap-4 w-full h-full"
+                            >
+                              <div className="relative w-16">
+                                <Image
+                                  src={subaccount.subAccountLogo}
+                                  alt="Logo sous-compte"
+                                  fill
+                                  className="object-contain rounded-md"
+                                />
+                              </div>
+                              <div className="flex flex-col">
+                                <span>{subaccount.name}</span>
+                                <span className="text-muted-foreground text-sm">
+                                  {subaccount.city}
+                                </span>
+                              </div>
+                            </Link>
                           </CommandItem>
                         ))
                       : 'Aucun comptes'}
@@ -226,71 +174,65 @@ console.log(sidebarOpt)
                 </CommandList>
                 {(user?.role === 'AGENCY_OWNER' ||
                   user?.role === 'AGENCY_ADMIN') && (
-                    <SheetClose>
-
-                  <Button
-                    className="w-full flex gap-2 mt-2"
-                    onClick={() =>
-                      setOpen(
-                        <CustomModal
-                        title="Créer un sous-compte"
-                        subheading="Créer un sous-compte pour votre entreprise"
-                        >
-                          <SubAccountDetails
-                          agencyDetails= {user?.agency as Agency}
-                          userId={user?.id as string}
-                          userName={user?.name}
-                          />
-                        </CustomModal>,
-                      )
-                    }
+                  <SheetClose>
+                    <Button
+                      className="w-full flex gap-2 mt-2"
+                      onClick={() =>
+                        setOpen(
+                          <CustomModal
+                            title="Créer un sous-compte"
+                            subheading="Créer un sous-compte pour votre entreprise"
+                          >
+                            <SubAccountDetails
+                              agencyDetails={user?.agency as Agency}
+                              userId={user?.id as string}
+                              userName={user?.name}
+                            />
+                          </CustomModal>,
+                        )
+                      }
                     >
-                    <PlusCircle size={15} />
-                    Créer un sous compte
-                  </Button>
-                </SheetClose>
+                      <PlusCircle size={15} />
+                      Créer un sous compte
+                    </Button>
+                  </SheetClose>
                 )}
               </Command>
             </PopoverContent>
           </Popover>
-          <p className='text-muted-foreground text-xs mb-2'>
-            MENU
-          </p>
-          <Separator className='mb-4'/>
+          <p className="text-muted-foreground text-xs mb-2">MENU</p>
+          <Separator className="mb-4" />
           <nav className="relative">
-   <Command className="rounded-lg overflow-visible bg-transparent"
-   >
-       <CommandInput
-       placeholder="Rechercher..."
-       />
+            <Command className="rounded-lg overflow-visible bg-transparent">
+              <CommandInput placeholder="Rechercher..." />
+              <CommandList className="py-16 overflow-visible">
+                <CommandEmpty>Auncun résultat trouvée</CommandEmpty>
+                <CommandGroup className="overflow-visible">
+                  {sidebarOpt.map((sidebarOptions) => {
+                    let val
+                    const result = icons.find(
+                      (icon) => icon.value === sidebarOptions.icon,
+                    )
 
-       <CommandList className="pb-16 overflow-visible">
-        <CommandEmpty>Auncun résultat trouvée</CommandEmpty>
-       
-        <CommandGroup className="overflow-visible">
-          {sidebarOpt.map((sidebarOptions) => {
-            
-            let val 
-            const result =  icons.find((icon) => icon.value === sidebarOptions.icon)
-           
-            if(result) {
-              val = <result.path/>
-            }
-           
-            return <CommandItem key={sidebarOptions.id} className="md:w-[320px] w-full ">
-              <Link
-              href={sidebarOptions.link}
-              className="flex items-center gap-2 hover:bg-transparent rounded-md transition-all md:w-full w-[320px] "
-              >
-                {val}
-                <span>{sidebarOptions.name}</span>
-              </Link>
-            </CommandItem>
-          })}
+                    if (result) {
+                      val = <result.path />
+                    }
 
-        </CommandGroup>
-       </CommandList>
-   </Command>
+                    return (
+                      <CommandItem key={sidebarOptions.id} className="md:w-[320px] w-full">
+                        <Link
+                          href={sidebarOptions.link}
+                          className="flex items-center gap-2 hover:bg-transparent rounded-md transition-all md:w-full w-[320px]"
+                        >
+                          {val}
+                          <span>{sidebarOptions.name}</span>
+                        </Link>
+                      </CommandItem>
+                    )
+                  })}
+                </CommandGroup>
+              </CommandList>
+            </Command>
           </nav>
         </div>
       </SheetContent>
@@ -299,3 +241,4 @@ console.log(sidebarOpt)
 }
 
 export default MenuOptions
+
