@@ -205,7 +205,7 @@ const MenuOptions = ({
           <nav className="relative">
             <Command className="rounded-lg overflow-visible bg-transparent">
               <CommandInput placeholder="Rechercher..." />
-              <CommandList className="py-16 overflow-visible">
+              <CommandList className="py-4 overflow-visible">
                 <CommandEmpty>Auncun résultat trouvée</CommandEmpty>
                 <CommandGroup className="overflow-visible">
                   {sidebarOpt.map((sidebarOptions) => {

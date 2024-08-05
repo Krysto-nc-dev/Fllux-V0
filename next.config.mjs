@@ -4,7 +4,7 @@ const nextConfig = {
     domains: [
       'uploadthing.com',
       'utfs.io',
-      'image.clerk.com',
+      'img.clerk.com', // Correction du domaine ici
       'files.stripe.com',
       'krystotest-erp.square.nc',
     ],
